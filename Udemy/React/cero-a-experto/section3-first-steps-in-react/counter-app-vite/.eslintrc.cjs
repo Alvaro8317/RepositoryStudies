@@ -19,5 +19,8 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    "env": {
+      "jest": true
+  }
   },
 };

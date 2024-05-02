@@ -4,12 +4,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 /* Aquí se importan los estilos globales */
 import './index.css';
-import CounterApp from './CounterApp';
+import FirstApp from './FirstApp';
 /* Se renderiza */
-
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <CounterApp value={123}></CounterApp>
+    {/* <CounterApp value={123}></CounterApp> */}
+    <FirstApp title='Hola!' subtitle='Hola desde un subtitulo'></FirstApp>
   </React.StrictMode>
 );

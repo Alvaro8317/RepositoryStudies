@@ -10,15 +10,15 @@
  * Se pueden crear los valores por defecto en defaultProps o en los parámetros del functional component, pero mejor práctica en defaultProps porque con 5 parámetros por defecto se volvería difícil de leer el código
  */
 import PropTypes from 'prop-types';
-const App = ({ title, subtitle }) => {
+const App = ({ title = 'No hay título', subtitle = 'No hay subtitulo' }) => {
   // if (!title) {
   //   throw new Error('El title no existe');
   // }
   return (
     <>
-      <h1>Hola React</h1>
-      <h2>He encontrado este title en los props: {title}</h2>
-      <h2>He encontrado este subtitle en los props: {subtitle}</h2>
+      <div>Hola React</div>
+      <h1 data-testid='test-title'>{title}</h1>
+      <h2>{subtitle}</h2>
     </>
   );
 };
@@ -28,9 +28,7 @@ App.propTypes = {
   subtitle: PropTypes.string.isRequired,
 };
 /* Props por defecto */
-App.defaultProps = {
-  title: 'No hay título',
-  subtitle: 'No hay subtitulo',
-  name: 'Alvaro Garzón',
-};
+// App.defaultProps = {
+//   subtitle: 'No hay subtitulo',
+// };
 export default App;
