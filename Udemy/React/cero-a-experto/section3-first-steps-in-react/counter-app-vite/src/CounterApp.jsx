@@ -21,10 +21,10 @@ const CounterApp = ({ value }) => {
   return (
     <>
       <h1>CounterApp</h1>
-      <h2> {counter} </h2>
+      <h2>{counter}</h2>
       <button onClick={handlerButtonAdd}>+1</button>
       <button onClick={handlerButtonSubstract}>-1</button>
-      <button onClick={handlerButtonReset}>Reset</button>
+      <button aria-label='btn-reset' onClick={handlerButtonReset}>Reset</button>
     </>
   );
 };
