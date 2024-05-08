@@ -25,10 +25,10 @@ const arreglo4 = [...arreglo2, 6, 7];
 console.log(arreglo4);
 console.log(arreglo2);
 /* Un callback es una función que se ejecuta dentro de otra función, para este caso, map ejecuta la función que yo le definí */
-/* 
-* Si una arrow function es inline, no es necesario dejar el return
-* Si no se deja especifico un return, se retorna undefined
-* Documentación de MAP: https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/map
-*/
+/*
+ * Si una arrow function es inline, no es necesario dejar el return
+ * Si no se deja especifico un return, se retorna undefined
+ * Documentación de MAP: https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+ */
 const arregloConMap = arreglo2.map((number) => number * 2);
-console.log(arregloConMap)
+console.log(arregloConMap);
