@@ -1,0 +1,62 @@
+/* Globales */
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+/* Header y navegación */
+.nombre-sitio {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  font-size: 35px;
+}
+
+h1 {
+  color: #000;
+}
+
+.nombre-sitio span {
+  color: #037bc0;
+}
+
+.main-nav {
+  /* Atajo para border, aplica para border, border-top, etc. */
+  border-top: 1px solid #e1e1e1;
+  /* Atajo para padding, aplica arriba, derecha, abajo, izquierda 
+  padding: 20px 0 20px 0;*/
+  /* Alternativa al atajo usando dos medidas, donde arriba-abajo y derecha-izquierda */
+  padding: 20px 0;
+  /* Aplicando los atajos manualmente
+  border-color: #e1e1e1;
+  border-top-style: solid;
+  border-style: solid; Se aplica a los 4 lados
+  border-width: 1px; */
+}
+
+.container-nav {
+  border-top: 1px solid #e1e1e1;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero {
+  background-image: url(../../section1-intro-to-html/images/principal.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 550px;
+  display: block;
+}

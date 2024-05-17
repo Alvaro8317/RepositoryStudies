@@ -1,0 +1,76 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+h1 {
+  font-size: x-large;
+  /* color: #000000; */
+  /* color: rgb(red, green, blue); */
+  /* color: rgb(red, green, blue, .8); */
+  /* color: rgba(red, green, blue, .8);
+  color: rgb(100 110 110 / .5); */
+  color: #000;
+  /* Una forma */
+  /* span {
+    color: #037bc0;
+  } */
+}
+
+/* Otra forma */
+h1 span {
+  color: #037bc0;
+}
+
+h2 span {
+  color: #055bc2;
+}
+
+/* Pseudo selectores */
+/* En pseudo selectores no empieza a contar desde 0 como para nth/child */
+nav a:first-child {
+  text-transform: uppercase;
+  font-size: 50px;
+}
+
+nav a:first-of-type {
+  text-transform: uppercase;
+  font-size: 50px;
+}
+
+nav a:last-of-type {
+  text-transform: uppercase;
+  font-size: 40px;
+}
+
+nav a:nth-child(2) {
+  text-transform: uppercase;
+  font-size: 40px;
+  background-color: #000;
+}
+
+/* Clases */
+
+.navegacion {
+  text-transform: lowercase;
+}
+
+nav.navegacion a {
+  text-transform: uppercase;
+}
+
+#navegacion a {
+  text-transform: capitalize;
+}
+
+.nombre-sitio{
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  font-size: 35px;
+}
