@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests of GifItem Component should match the snapshot 1`] = `
+<div>
+  <div
+    class="card"
+  >
+    <img
+      alt="metal gear art GIF"
+      src="https://giphy.com/gifs/oktotally-art-pixel-jQQ854R8tx3wI"
+    />
+    <p>
+       
+      metal gear art GIF
+       
+    </p>
+  </div>
+</div>
+`;
