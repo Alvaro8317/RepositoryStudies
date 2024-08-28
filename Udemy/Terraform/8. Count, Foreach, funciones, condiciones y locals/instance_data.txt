@@ -1,0 +1,7 @@
+Instance created with the IP 34.224.94.159 
+Instance deleted with the IP 34.224.94.159 
+Instance created with the IP 34.232.78.9 
+Instance deleted with the IP 34.232.78.9 
+Instance created with the IP 100.25.119.112 
+Instance deleted with the IP 100.25.119.112 
+Instance created with the IP 100.25.133.184 
