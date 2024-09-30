@@ -13,7 +13,7 @@ Este servicio permite
 - Gestión de identidades y acceso - Admite SSO y MFA
 - Integración de aplicaciones
 - Desarrollo de aplicaciones - Los desarrolladores pueden utilizar Entra ID como plataforma de identidad para sus aplicaciones
-- Seguridad e inteligencia - Ofrece capacidades avanzadas con Entra ID Protection
+- Seguridad e inteligencia - Ofrece capacidades avanzadas con Entra ID Protection para protección de ataques DDOS usando sensores integrados y la inteligencia de amenazas de Microsoft
 - Es B2B y B2C, acceso condicionado, gestión de privilegios, etc.
 
 ### Inquilino (Tenant)
