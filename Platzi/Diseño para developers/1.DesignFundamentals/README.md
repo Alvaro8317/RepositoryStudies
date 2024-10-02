@@ -105,3 +105,4 @@ Secciones más comunes son:
 - Target o audiencia
 - Competencia
 - Distribución
+- Cronograma
