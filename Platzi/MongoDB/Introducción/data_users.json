@@ -1,0 +1,127 @@
+[
+  {
+    "nombre": "María García",
+    "edad": 28,
+    "ciudad": "Madrid"
+  },
+  {
+    "nombre": "Juan Pérez",
+    "edad": 35,
+    "ciudad": "Barcelona"
+  },
+  {
+    "nombre": "Ana López",
+    "edad": 22,
+    "ciudad": "Sevilla"
+  },
+  {
+    "nombre": "Carlos Fernández",
+    "edad": 41,
+    "ciudad": "Valencia"
+  },
+  {
+    "nombre": "Lucía Rodríguez",
+    "edad": 30,
+    "ciudad": "Bilbao"
+  },
+  {
+    "nombre": "Miguel Torres",
+    "edad": 27,
+    "ciudad": "Zaragoza"
+  },
+  {
+    "nombre": "Sofía Romero",
+    "edad": 33,
+    "ciudad": "Malaga"
+  },
+  {
+    "nombre": "Diego Ruiz",
+    "edad": 45,
+    "ciudad": "Murcia"
+  },
+  {
+    "nombre": "Laura Moreno",
+    "edad": 31,
+    "ciudad": "Alicante"
+  },
+  {
+    "nombre": "Alberto Jiménez",
+    "edad": 29,
+    "ciudad": "Granada"
+  },
+  {
+    "nombre": "Elena Navarro",
+    "edad": 24,
+    "ciudad": "Córdoba"
+  },
+  {
+    "nombre": "Roberto Cruz",
+    "edad": 50,
+    "ciudad": "Valladolid"
+  },
+  {
+    "nombre": "Raquel Gil",
+    "edad": 36,
+    "ciudad": "Vigo"
+  },
+  {
+    "nombre": "Fernando Herrera",
+    "edad": 40,
+    "ciudad": "Gijón"
+  },
+  {
+    "nombre": "Isabel Martín",
+    "edad": 26,
+    "ciudad": "Santander"
+  },
+  {
+    "nombre": "Luis Castro",
+    "edad": 23,
+    "ciudad": "Tenerife"
+  },
+  {
+    "nombre": "Patricia Gómez",
+    "edad": 34,
+    "ciudad": "Palma de Mallorca"
+  },
+  {
+    "nombre": "Javier Ortiz",
+    "edad": 4200000000,
+    "ciudad": "Almería",
+    "isAlive": true,
+    "sports": [
+      "tennis",
+      "football",
+      "basketball"
+    ],
+    "birthdate": "1980-01-01T00:00:00.000Z",
+    "bynaryCode": \x16\x00\x00\x00
+  },
+  {
+    "nombre": "Carmen Suárez",
+    "edad": 39,
+    "ciudad": "Pamplona"
+  },
+  {
+    "nombre": "Alejandro Vázquez",
+    "edad": 32,
+    "ciudad": "Salamanca"
+  }
+]
+
+// {
+//   "nombre": "María García",
+//   "edad": 28,
+//   "ciudad": "Madrid"
+// }
+// JSON - JavaScript Object Notation
+// BSON - Binary Encoded JavaScript Object Notation
+
+// {
+//   "hello": "world"
+// } →
+// \x16\x00\x00\x00 // total document size
+// \x02 // 0x02 = type String
+// hello\x00 // field name
+// \x06\x00\x00\x00world\x00 // field value
+// \x00 // 0x00 = type EOO ('end of object')
