@@ -1,0 +1,11 @@
+use("platzi-store");
+
+db.products.updateOne(
+  { _id: 2 },
+  // Change - Operators
+  {
+    $inc: {
+      price: 1200,
+    },
+  }
+);

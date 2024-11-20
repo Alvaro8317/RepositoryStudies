@@ -1,0 +1,16 @@
+use("platzi_store");
+/* En caso que no existe, lo inserta, si ya existe, lo actualiza */
+db.iot.updateOne(
+  {
+    sensor: "A001",
+    date: "2022-01-04",
+  },
+  {
+    $push: {
+      readings: 2325,
+    },
+  },
+  {
+    upsert: true,
+  }
+);

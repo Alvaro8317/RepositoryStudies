@@ -1,0 +1,8 @@
+use("platzi_store");
+
+db.monthlyBudget.find({ spent: { $gte: 100 } });
+db.monthlyBudget.find({
+  $expr: {
+    $lte: ["$spent", "$budget"] /* Es un operador para elegir un campo especifico */,
+  },
+});

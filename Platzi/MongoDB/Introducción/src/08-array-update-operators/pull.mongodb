@@ -1,0 +1,21 @@
+use("platzi_store");
+/* Este operador solo funciona para arrays */
+db.inventory.updateMany(
+  {},
+  {
+    /* Elimina un elemento del array */
+    $pull: {
+      tags: "book",
+    },
+  }
+);
+
+db.inventory.updateMany(
+  {},
+  {
+    /* elimina varios elementos del array */
+    $pull: {
+      tags: { $in: ["school", "appliance"] },
+    },
+  }
+);

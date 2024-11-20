@@ -1,0 +1,15 @@
+use("platzi_store");
+db.inventory.find();
+/* greater than (>) and greater than or equal (>=) */
+db.inventory.find({ qty: { $gt: 20 } });
+db.inventory.find({ qty: { $gte: 20 } });
+/* less than (<) and less than or equal (<=) */
+db.inventory.find({ qty: { $lt: 20 } });
+db.inventory.find({ qty: { $lte: 20 } });
+/* Se pueden juntar estos operadores */
+db.inventory.find({ qty: { $gte: 20, $lte: 25 } });
+db.inventory.find({
+  qty: { $gte: 20, $lte: 25 },
+  "item.code": { $ne: "123" },
+  "item.name": { $eq: "item ij" },
+});

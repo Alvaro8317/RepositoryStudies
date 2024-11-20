@@ -1,0 +1,26 @@
+use("sample_training");
+
+/* AND */
+
+/* Es un and implicito por defecto */
+db.inspections.find({ sector: "Tax Preparers - 891", result: "Unable to Locate" }).count();
+
+/* También se puede hacer explicito */
+
+db.inspections.find({ $and: [{ sector: "Tax Preparers - 891" }, { result: "Unable to Locate" }] }).count();
+
+/* OR */
+
+/* Or si es necesario que sea explicito */
+
+db.inspections.find({ $or: [{ sector: "Tax Preparers - 891" }, { result: "Unable to Locate" }] }).count();
+
+/* NOR - Documentos que no tenga sector ni result */
+
+db.inspections.find({ $nor: [{ sector: "Tax Preparers - 891" }, { result: "Unable to Locate" }] }).count();
+db.inspections.find({ $nor: [{ result: { $regex: /No violation Issued/i } }, { result: "Unable to Locate" }] }, { result: 1, _id: 0 });
+
+/* NOT, niega el resultado */
+
+db.inspections.find({ result: { $not: { $regex: /Unable to locate/i } } });
+

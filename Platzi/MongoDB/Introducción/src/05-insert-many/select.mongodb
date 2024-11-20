@@ -1,0 +1,2 @@
+use("platzi-store");
+db.products.find();

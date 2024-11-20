@@ -1,0 +1,12 @@
+use("platzi-store");
+
+db.products.updateOne(
+  { _id: 2 },
+  // Change - Operators
+  {
+    $set: {
+      name: "Another product name",
+      tags: ["A", "B", "C"],
+    },
+  }
+);

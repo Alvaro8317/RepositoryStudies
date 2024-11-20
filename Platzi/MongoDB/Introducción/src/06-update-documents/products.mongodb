@@ -1,0 +1,35 @@
+use("platzi-store");
+
+db.products.drop();
+db.products.insertMany(
+  [
+    {
+      _id: 1,
+      name: "Product1",
+      price: 100,
+    },
+    {
+      _id: 2,
+      name: "Product1",
+      price: 100,
+    },
+    {
+      _id: 3,
+      name: "Product1",
+      price: 100,
+    },
+    {
+      _id: 4,
+      name: "Product1",
+      price: 100,
+    },
+    {
+      name: "Product1",
+      price: 100,
+    },
+  ],
+  {
+    ordered: false,
+  }
+);
+db.products.find();

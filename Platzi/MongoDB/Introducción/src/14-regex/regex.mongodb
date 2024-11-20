@@ -1,0 +1,6 @@
+use("platzi-store");
+db.inventory.find({ "item.description": { $regex: /line/ } }); /* Busca patrón sencillo tal cuál */
+db.inventory.find({ "item.description": { $regex: /LINE/i } }); /* Busca sin ser case sensitive */
+db.inventory.find({ "item.description": { $regex: /line$/i } }); /* Final de una fase */
+db.inventory.find({ "item.description": { $regex: /^single/i } }); /* Principio de una frase */
+db.inventory.find({ "item.description": { $regex: /^s/im } }); /* Valida saltos de línea con m */
