@@ -1,32 +1,60 @@
-## Canales
-Un canal simplifica el proceso de compartición de datos entre go routines, es una vía de comunicación que permite enviar y recibir datos de manera síncrona o asíncrona.
+# Concurrencia
 
-Un canal permite enviar y recibir datos de un tipo dado. Los canales son tratados por referencia, lo que quiere decir que un canal creado así:
-```golang
+## Canales
+
+Los **canales** son una herramienta fundamental en Go que simplifica el intercambio de datos entre goroutines. Actúan como vías de comunicación que permiten enviar y recibir datos de manera síncrona o asíncrona, facilitando la colaboración y coordinación entre diferentes partes de un programa concurrente.
+
+### Declaración y Referencia
+
+Un canal permite enviar y recibir datos de un tipo específico. Los canales son tratados por referencia, lo que significa que un canal creado de la siguiente manera:
+
+```go
 var nombres chan string
 ```
-Apunta a nil
 
-El operador <- permite leer o escribir datos dentro de un canal, para enviar datos es así:
-```golang
-myChannelOfNames <- "Alvaro Garzón"
+inicialmente apunta a `nil`, lo que indica que aún no se ha asignado memoria para él.
+
+### Envío y Recepción de Datos
+
+El operador `<-` se utiliza para interactuar con los canales. Para **enviar** datos a un canal, se utiliza la siguiente sintaxis:
+
+```go
+nombres <- "Alvaro Garzón"
 ```
-Para leer datos de un canál, se usa el mismo operaodr pero en otro orden, ejemplo:
-```golang
-newVariable := <- myChannelOfNames
+
+Para **leer** datos de un canal, se utiliza el mismo operador, pero en el orden inverso:
+
+```go
+nuevoNombre := <-nombres
 ```
-Un canál sin búfer -> La go routine emisora se bloquea hasta que una receptora reciba la información del canál
-Un canál con búfer -> La go routine emisora se bloquea si al enviar datos a un canál, tiene el búfer ya lleno
-Los canales sin búfer después de cerrado pueden seguir entregando sus respectivos valores, después de vaciado el canál, entregará los zero values, por lo que será difícil identificar si un 0 es un valor correcto de un canál o es un zero value, por lo que se recomienda iterar los canáles con range, ejemplo:
-```golang
-channel := make(chan int, 3)
-channel <- 1
-channel <- 2
-channel <- 3
-close(channel)
-for num := range channel{
-  fmt.Println("Recibiendo datos del canál", num)
+
+### Tipos de Canales
+
+- **Canales sin búfer**: En este caso, la goroutine emisora se bloquea hasta que una goroutine receptora recibe la información del canal. Esto garantiza que los datos se transmitan de manera sincronizada.
+
+- **Canales con búfer**: La goroutine emisora se bloqueará si intenta enviar datos a un canal que ya ha alcanzado su capacidad máxima. Los canales con búfer permiten que múltiples valores sean enviados sin bloquear la goroutine emisora, hasta que el búfer esté lleno.
+
+### Cierre de Canales
+
+Un canal cerrado puede seguir entregando sus respectivos valores. Sin embargo, después de que se vacíe, comenzará a entregar _zero values_ (valores cero) del tipo asociado al canal. Esto puede dificultar la identificación de un valor cero como un dato válido o como un _zero value_. Por esta razón, se recomienda iterar sobre los canales utilizando `range`.
+
+Por ejemplo:
+
+```go
+canal := make(chan int, 3)
+canal <- 1
+canal <- 2
+canal <- 3
+close(canal)
+
+for num := range canal {
+    fmt.Println("Recibiendo datos del canal:", num)
 }
 fmt.Println("Fin")
 ```
-Si el canál está vacío pero no cerrado, el búcle for esperará indefinidamente hasta que se reciban más valores o el canál se cierre.
+
+Si el canal está vacío pero no cerrado, el bucle `for` esperará indefinidamente hasta que se reciban más valores o el canal se cierre.
+
+### Resumen
+
+Los canales son una herramienta poderosa para manejar la concurrencia en Go. Facilitan la comunicación entre goroutines, garantizando la sincronización y la seguridad de los datos. La comprensión adecuada de los canales y su uso puede mejorar significativamente la calidad y la eficiencia del código concurrente.
