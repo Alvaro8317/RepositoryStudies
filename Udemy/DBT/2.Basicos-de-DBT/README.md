@@ -352,3 +352,126 @@ Los tests en dbt permiten validar la calidad y consistencia de los datos, asegur
 | **Genérico** | Pruebas predefinidas para restricciones comunes. | Validar calidad general y reglas básicas.    |
 
 ---
+
+## **Macros en dbt**
+
+Las macros en **dbt** son **plantillas de código Jinja** que permiten **reutilizar lógica** o crear bloques de código dinámicos dentro de los modelos, tests, snapshots y más. Son especialmente útiles para evitar duplicación de código y mantener un proyecto dbt modular y eficiente.
+
+---
+
+### **¿Qué son las macros?**
+
+- Son funciones personalizadas escritas en Jinja que puedes definir y reutilizar en múltiples partes de tu proyecto dbt.
+- Se almacenan en el directorio **`macros/`** dentro de tu proyecto.
+- dbt incluye un conjunto de macros integradas listas para usar.
+
+---
+
+### **Usos comunes de las macros**
+
+1. **Lógica reutilizable:** Crear transformaciones o cálculos que se repiten en diferentes modelos.
+2. **Automatización:** Generar dinámicamente consultas SQL o configuraciones de dbt.
+3. **Custom Tests:** Crear **tests genéricos** personalizados para validar reglas de negocio específicas.
+4. **Integración externa:** Importar librerías externas para ampliar la funcionalidad.
+
+---
+
+### **Ejemplo básico de macro**
+
+**Definición de una macro:**
+
+```jinja
+-- macros/my_macros.sql
+{% macro calculate_discount(price, discount_rate) %}
+    {{ price }} * (1 - {{ discount_rate }})
+{% endmacro %}
+```
+
+**Uso en un modelo:**
+
+```sql
+SELECT
+    id,
+    price,
+    {{ calculate_discount('price', '0.2') }} AS discounted_price
+FROM {{ ref('products') }}
+```
+
+---
+
+### **Macros integradas en dbt**
+
+dbt proporciona macros listas para usar, por ejemplo:
+
+- **`ref`**: Para referenciar modelos.
+- **`source`**: Para referenciar fuentes de datos.
+- **`generate_schema_name`**: Para definir el esquema donde se almacenarán los modelos.
+- **`run_query`**: Para ejecutar consultas SQL dinámicamente.
+- **`log`**: Para imprimir mensajes en los registros de ejecución.
+
+Ejemplo:
+
+```jinja
+{% set row_count = run_query('SELECT COUNT(*) FROM {{ ref('my_table') }}').table.rows[0][0] %}
+{{ log('El número de filas es: ' ~ row_count, info=True) }}
+```
+
+---
+
+### **Macros para tests genéricos**
+
+Puedes crear macros para **tests personalizados** que se ejecuten en columnas o modelos.
+
+**Definición de un test genérico:**
+
+```jinja
+-- macros/tests/is_positive.sql
+{% macro test_is_positive(model, column_name) %}
+SELECT *
+FROM {{ model }}
+WHERE {{ column_name }} < 0
+{% endmacro %}
+```
+
+**Uso en `schema.yml`:**
+
+```yaml
+version: 2
+
+models:
+  - name: sales
+    columns:
+      - name: revenue
+        tests:
+          - is_positive
+```
+
+---
+
+### **Importar macros de paquetes externos**
+
+Puedes usar paquetes como **`dbt-utils`**, que incluyen macros predefinidas. Para importar:
+
+1. Añade el paquete al archivo **`packages.yml`**:
+
+   ```yaml
+   packages:
+     - package: dbt-labs/dbt_utils
+       version: 0.9.6
+   ```
+
+2. Usa las macros del paquete:
+
+   ```sql
+   SELECT
+       {{ dbt_utils.surrogate_key(['id', 'created_at']) }} AS unique_key
+   FROM {{ ref('users') }}
+   ```
+
+---
+
+### **Beneficios de las macros**
+
+- **Reusabilidad:** Menos duplicación de código en el proyecto.
+- **Flexibilidad:** Dinamismo para manejar múltiples configuraciones o escenarios.
+- **Escalabilidad:** Facilita el mantenimiento al centralizar lógica repetida.
