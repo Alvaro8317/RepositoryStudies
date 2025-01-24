@@ -247,13 +247,108 @@ En dbt, la frescura de los datos se gestiona principalmente a través de la func
 
 En resumen, la **frescura** en dbt es una forma de garantizar que los datos que estás utilizando estén actualizados y, en caso de no ser así, recibir una advertencia o error para tomar las medidas adecuadas. Es una funcionalidad muy útil para mantener la calidad y fiabilidad de los datos dentro de tus pipelines de datos.
 
-## Snapshots en DBT
+## **Snapshots en dbt**
 
-Estos están ubicados en el directorio de snapshots, cuenta con dos estrategias, por timestamp que tiene una llave única y un campo de updated_at en el modelo fuente y por check, cualquier cambio en un conjunto de columnas será elegido como una actualización
+Los **snapshots** en **dbt** permiten realizar un seguimiento de los cambios históricos en los datos. Esto es útil cuando necesitas capturar la evolución de los registros en el tiempo, creando una versión histórica de los datos.
 
-## Tests
+### **Características de los snapshots**
 
-Existen tests genericos y tests singulares:
+1. **Ubicación:** Los snapshots se encuentran en el directorio **`snapshots/`** dentro de tu proyecto dbt.
+2. **Estrategias:**
+   - **Por timestamp (`timestamp`):**
+     - Usa una clave única y un campo de **`updated_at`** para detectar cambios en los datos.
+     - Solo registra cambios cuando el valor de **`updated_at`** se modifica.
+   - **Por cambios (`check`):**
+     - Compara un conjunto de columnas especificadas.
+     - Registra un cambio si cualquier columna en el conjunto difiere entre versiones consecutivas.
 
-- Singulares, son fáciles, son queryes SQL almacenados en tests que experan retornar un result set vacío
-- Genericos, estos son únicos para validar una constraint de única, no nula, valores aceptados y relaciones hacía otras tablas.
+### **Ejemplo de configuración de snapshot**
+
+```sql
+{% snapshot my_snapshot %}
+
+{{ config(
+    target_schema='snapshots',
+    unique_key='id',
+    strategy='timestamp', -- O 'check'
+    updated_at='updated_at'
+) }}
+
+SELECT
+    id,
+    name,
+    status,
+    updated_at
+FROM
+    source('my_source', 'my_table')
+
+{% endsnapshot %}
+```
+
+### **Casos de uso de snapshots**
+
+- Rastrear historiales de registros de clientes o productos.
+- Analizar cambios en estados o configuraciones a lo largo del tiempo.
+- Construir sistemas de auditoría.
+
+---
+
+## **Tests en dbt**
+
+Los tests en dbt permiten validar la calidad y consistencia de los datos, asegurando que cumplen con las reglas y expectativas del negocio.
+
+### **Tipos de tests**
+
+1. **Tests singulares (`singular`):**
+
+   - Son consultas **SQL personalizadas** que validan condiciones específicas.
+   - Esperan un conjunto de resultados vacío para indicar que la prueba se ha pasado correctamente.
+   - **Ejemplo:**
+
+     ```sql
+     -- tests/custom_test.sql
+     SELECT *
+     FROM {{ ref('my_table') }}
+     WHERE created_at > updated_at
+     ```
+
+2. **Tests genéricos (`generic`):**
+
+   - Validan **restricciones comunes** como valores únicos, no nulos, aceptables o relaciones entre tablas.
+   - Se configuran directamente en el archivo **`schema.yml`** del modelo.
+   - **Tipos de validaciones comunes:**
+     - **`unique`:** Garantiza que los valores sean únicos.
+     - **`not_null`:** Asegura que no haya valores nulos.
+     - **`accepted_values`:** Valida que los valores estén dentro de un conjunto permitido.
+     - **`relationships`:** Comprueba la integridad referencial entre tablas.
+   - **Ejemplo de configuración:**
+
+     ```yaml
+     version: 2
+
+     models:
+       - name: my_table
+         columns:
+           - name: id
+             tests:
+               - unique
+               - not_null
+           - name: status
+             tests:
+               - accepted_values:
+                   values: ["active", "inactive", "pending"]
+           - name: customer_id
+             tests:
+               - relationships:
+                   to: ref('customers')
+                   field: id
+     ```
+
+### **Comparativa entre tests**
+
+| **Tipo**     | **Descripción**                                  | **Casos de uso**                             |
+| ------------ | ------------------------------------------------ | -------------------------------------------- |
+| **Singular** | Pruebas específicas con SQL personalizado.       | Validaciones únicas o condiciones complejas. |
+| **Genérico** | Pruebas predefinidas para restricciones comunes. | Validar calidad general y reglas básicas.    |
+
+---
