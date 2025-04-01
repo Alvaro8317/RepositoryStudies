@@ -1,0 +1,13 @@
+[
+  {
+    "IndexName": "AlbumTitleIndex",
+    "KeySchema": [
+      { "AttributeName": "Artist", "KeyType": "HASH" },
+      { "AttributeName": "AlbumTitle", "KeyType": "RANGE" }
+    ],
+    "Projection": {
+      "ProjectionType": "INCLUDE",
+      "NonKeyAttributes": ["Genre", "Year"]
+    }
+  }
+]

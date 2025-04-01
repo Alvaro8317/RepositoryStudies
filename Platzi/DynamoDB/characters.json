@@ -1,0 +1,101 @@
+{
+  "Personajes": [
+    {
+      "PutRequest": {
+        "Item": {
+          "Id": {
+            "N": "43"
+          },
+          "Name": {
+            "S": "BigMorty"
+          },
+          "Status": {
+            "S": "Dead"
+          },
+          "Species": {
+            "L": [
+              {
+                "S": "Human"
+              },
+              {
+                "S": "Alien"
+              }
+            ]
+          },
+          "Origin": {
+            "S": "Uknown"
+          },
+          "Location": {
+            "L": [
+              {
+                "S": "Citadel of Ricks"
+              },
+              {
+                "S": "https://rickandmortyapi.com/api/location/3"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "Id": {
+            "N": "69"
+          },
+          "Name": {
+            "S": "Commander Rick"
+          },
+          "Status": {
+            "S": "Dead"
+          },
+          "Species": {
+            "L": [
+              {
+                "S": "Human"
+              },
+              {
+                "S": "Alien"
+              }
+            ]
+          },
+          "Origin": {
+            "S": "Uknown"
+          },
+          "Gender": {
+            "S": "Male"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "Id": {
+            "N": "238"
+          },
+          "Name": {
+            "S": "Mr. Booby Buyer"
+          },
+          "Status": {
+            "S": "Alive"
+          },
+          "Species": {
+            "L": [
+              {
+                "S": "Mythological"
+              }
+            ]
+          },
+          "Type": {
+            "S": "Boobie buyer reptilian"
+          },
+          "Gender": {
+            "S": "Male"
+          }
+        }
+      }
+    }
+  ]
+}

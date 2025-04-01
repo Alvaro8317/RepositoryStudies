@@ -1,0 +1,67 @@
+{
+    "Music": [
+      {
+        "PutRequest": {
+          "Item": {
+            "Artist": {
+              "S": "Metallica"
+            },
+            "SongTitle": {
+              "S": "Master Of Puppets"
+            },
+            "AlbumTitle": {
+              "S": "Master Of Puppets"
+            },
+            "Genre": {
+              "S": "Metal"
+            },
+            "Year": {
+              "S": "1986"
+            }
+          }
+        }
+      },
+      {
+        "PutRequest": {
+          "Item": {
+            "Artist": {
+              "S": "Metallica"
+            },
+            "SongTitle": {
+              "S": "Baterry"
+            },
+            "AlbumTitle": {
+              "S": "Master Of Puppets"
+            },
+            "Genre": {
+              "S": "Metal"
+            },
+            "Year": {
+              "S": "1986"
+            }
+          }
+        }
+      },
+      {
+        "PutRequest": {
+          "Item": {
+            "Artist": {
+              "S": "Metallica"
+            },
+            "SongTitle": {
+              "S": "Whiskey in the jar"
+            },
+            "AlbumTitle": {
+              "S": "Garage inc"
+            },
+            "Genre": {
+              "S": "Metal"
+            },
+            "Year": {
+              "S": "1989"
+            }
+          }
+        }
+      }
+    ]
+  }
