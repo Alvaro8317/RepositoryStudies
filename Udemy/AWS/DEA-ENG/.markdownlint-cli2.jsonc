@@ -1,0 +1,15 @@
+{
+  "config": {
+    "default": true,
+    // Los apuntes tienen párrafos largos en español; no forzar wrap de línea.
+    "MD013": false,
+    // Se usa HTML inline ocasionalmente (ej. saltos de línea en tablas).
+    "MD033": false,
+    // Encabezados repetidos (ej. "Idea clave") son comunes entre secciones distintas.
+    "MD024": { "siblings_only": true },
+    // Permite listas con "-" y "*" mezclados según el apunte.
+    "MD004": false
+  },
+  "globs": ["**/*.md"],
+  "ignores": ["node_modules/**", "infra/**", "**/Books/**"]
+}
