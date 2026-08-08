@@ -19,6 +19,10 @@ Markdown**. El flujo de trabajo es:
      existentes en `1-data-ingestion/` (ver ejemplos abajo).
    - Proponer **2-3 nombres de archivo candidatos** que respeten la nomenclatura del proyecto (ver
      sección siguiente) para que el usuario elija antes de escribir el archivo definitivo.
+   - Escribir el apunte **directamente en la ruta final** (`<carpeta>/<numero>-<slug-elegido>.md`) una
+     vez el usuario elige el nombre — no redactarlo primero en un scratchpad/tmp y copiarlo después.
+     Si el usuario decide renombrar el archivo más adelante, basta con hacer `mv`/renombrar, no hace
+     falta reescribir el contenido.
 4. Claude NO debe archivar por su cuenta transcripciones futuras sin que el usuario indique
    primero la carpeta destino.
 
@@ -67,13 +71,22 @@ Reglas:
 
 ```text
 DEA-ENG/
-├── 1-data-ingestion/     # S3, patrones de ingestión (batch/streaming), AWS Glue, práctica de crawler
-├── 2-query-athena/       # (vacío por ahora)
-├── 3-glue-deep-dive/     # (vacío por ahora)
-├── 4-serverless-lambda/  # (vacío por ahora)
-├── 5-data-streaming/     # (vacío por ahora)
-└── infra/                # CDK (Python) — infraestructura de AWS para practicar el curso
+├── 1-data-ingestion/         # S3, patrones de ingestión (batch/streaming), AWS Glue, práctica de crawler
+├── 2-query-athena/           # Athena, federated queries, coste/rendimiento, workgroups
+├── 3-glue-deep-dive/         # Glue avanzado: coste, budgets, jobs, bookmarks, workflows, DataBrew...
+├── 4-serverless-lambda/      # Lambda, práctica Lambda+S3, Lambda Layers
+├── 5-data-streaming/         # Kinesis (overview, Data Streams, Firehose), replayability, enhanced fan-out
+├── 6-storage-s3/             # (vacío por ahora)
+├── 7-other-storage-services/ # EBS, snapshots/volumes, EFS, AWS Backup
+├── 8-dynamo-db/              # (vacío por ahora)
+├── 9-redshift-data-warehouse/ # (vacío por ahora)
+├── 10-other-db-services/     # (vacío por ahora)
+└── infra/                    # CDK (Python) — infraestructura de AWS para practicar el curso
 ```
+
+> ⚠️ Este árbol puede desactualizarse a medida que se añaden apuntes/carpetas nuevas. Si vas a
+> confiar en él (por ejemplo, para saber qué carpetas existen o qué contienen), verifica primero con
+> `ls` en vez de asumir que está al día.
 
 ### Formato de cada apunte
 
@@ -98,17 +111,37 @@ curso.
 
 - `app.py` — entry point del CDK app. Cuenta/región se resuelven vía el profile `local` (definido en
   `cdk.json`), variables `CDK_DEFAULT_ACCOUNT` / `CDK_DEFAULT_REGION`, y `ENVIRONMENT` (default `prod`).
-- `cdk/cdk_stack.py` — stack único (`CdkStack`) con los recursos actuales:
-  - Bucket S3 (`alvaro8317-dea-certification-{env_name}`).
-  - Glue Database (`customers_{env_name}`) — nombres de Glue solo admiten minúsculas, números y
-    guion bajo.
-  - IAM Role para el Glue Crawler (managed policy `AWSGlueServiceRole`), con permiso de lectura
-    restringido a `documents/*` del bucket.
-  - Glue Crawler (`customers-crawler-{env_name}`) apuntando a `s3://<bucket>/documents/`, sin
-    schedule (solo on-demand), con `table_prefix="cdk-table"`.
+- `cdk/cdk_stack.py` — stack único (`CdkStack`) que solo orquesta: crea el bucket S3 compartido
+  (`alvaro8317-dea-certification-{env_name}`) y delega el resto de recursos a funciones en
+  `cdk/resources/`, agrupadas por servicio. Todas esas funciones reciben el propio stack (`self`)
+  como `scope` de sus recursos — mismo nivel que si estuvieran inline en `cdk_stack.py` — para no
+  alterar los logical IDs de CloudFormation de recursos ya desplegados (`cdk diff` debe dar "no
+  differences" tras cualquier refactor de este tipo).
+  - `cdk/resources/streaming.py` (`add_streaming_resources`):
+    - Kinesis Stream on-demand (`data-stream-{env_name}`).
+    - Lambda `stream-consumer-{env_name}` (`cdk/lambda/stream_consumer/index.py`) que consume el
+      stream como event source (consumidor estándar, `starting_position=LATEST`, `batch_size=100`) y
+      escribe en `streaming-data/*` del bucket.
+    - Firehose delivery stream `kds-to-s3-{env_name}` (origen: el mismo Kinesis Stream; destino: el
+      bucket bajo `firehose-streaming-cdk/*`; buffer de 5 MB / 300 s) con transformación vía Lambda
+      `firehose-transform-{env_name}` (`cdk/lambda/firehose_transform/index.py`).
+    - Los roles IAM del Firehose (`firehose-delivery-role-{env_name}`) usan `Grant.apply_before(...)`
+      sobre el `CfnDeliveryStream` — sin eso, CloudFormation puede crear el delivery stream antes de
+      que la policy del rol exista, y falla con `not authorized to perform: kinesis:DescribeStream`.
+  - `cdk/resources/glue.py` (`add_glue_resources`):
+    - Glue Database (`customers_{env_name}`) — nombres de Glue solo admiten minúsculas, números y
+      guion bajo.
+    - IAM Role para el Glue Crawler (managed policy `AWSGlueServiceRole`), con permiso de lectura
+      restringido a `documents/*` del bucket.
+    - Glue Crawler (`customers-crawler-{env_name}`) apuntando a `s3://<bucket>/documents/`, sin
+      schedule (solo on-demand), con `table_prefix="cdk-table"`.
+    - Glue Job `documents-to-parquet-{env_name}` (script en `cdk/scripts/documents_to_parquet.py`,
+      subido como `s3_assets.Asset`) que convierte `documents/*` a Parquet en `documents-target/*`,
+      sin schedule (on-demand), Glue 4.0, 2 workers `G.1X`.
 - `tests/unit/test_cdk_stack.py` — tests unitarios del stack (assertions sobre el template sintetizado).
 - Proyecto CDK estándar: virtualenv en `.venv/`, dependencias en `requirements.txt` /
   `requirements-dev.txt`, comandos habituales `cdk synth`, `cdk diff`, `cdk deploy`.
 
 Esta infraestructura evoluciona en paralelo a los apuntes: a medida que el curso avanza (Athena,
-Glue avanzado, Lambda, streaming), es esperable que `cdk_stack.py` crezca con nuevos recursos.
+Glue avanzado, Lambda, streaming), es esperable que `cdk/resources/` crezca con nuevos módulos por
+servicio (y `cdk_stack.py` con una línea más para invocarlos).
