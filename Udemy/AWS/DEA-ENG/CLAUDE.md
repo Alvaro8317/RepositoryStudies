@@ -78,9 +78,19 @@ DEA-ENG/
 ├── 5-data-streaming/         # Kinesis (overview, Data Streams, Firehose), replayability, enhanced fan-out
 ├── 6-storage-s3/             # (vacío por ahora)
 ├── 7-other-storage-services/ # EBS, snapshots/volumes, EFS, AWS Backup
-├── 8-dynamo-db/              # (vacío por ahora)
+├── 8-dynamo-db/              # DynamoDB: componentes, claves, índices, streams, APIs, DAX, capacidad, TTL, hot partitions
 ├── 9-redshift-data-warehouse/ # (vacío por ahora)
-├── 10-other-db-services/     # (vacío por ahora)
+├── 10-other-db-services/     # RDS, ACID/locks, Aurora, DocumentDB, Neptune, Keyspaces, MemoryDB, Timestream
+├── 11-compute-services/      # (vacío por ahora)
+├── 12-analytics/             # (vacío por ahora)
+├── 13-machine-learning-sagemaker/ # (vacío por ahora)
+├── 14-application-integration/    # (vacío por ahora)
+├── 15-management-monitoring-governance/ # (vacío por ahora)
+├── 16-containers/            # (vacío por ahora)
+├── 17-migration/             # (vacío por ahora)
+├── 18-vpcs/                  # (vacío por ahora)
+├── 19-security/              # (vacío por ahora)
+├── 20-practice-exam/         # (vacío por ahora)
 └── infra/                    # CDK (Python) — infraestructura de AWS para practicar el curso
 ```
 
