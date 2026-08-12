@@ -18,6 +18,8 @@
   "context": {
     "enableStreaming": false,
     "enableGlue": false,
+    "enableS3Replication": false,
+    "enableDynamodb": false,
     "@aws-cdk-containers/ecs-service-extensions:enableDefaultLogDriver": true,
     "@aws-cdk/aws-apigateway:authorizerChangeDeploymentLogicalId": true,
     "@aws-cdk/aws-apigateway:disableCloudWatchRole": true,

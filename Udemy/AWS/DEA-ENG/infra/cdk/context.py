@@ -9,6 +9,7 @@ class ContextFlag(str, Enum):
     ENABLE_STREAMING = "enableStreaming"
     ENABLE_GLUE = "enableGlue"
     ENABLE_S3_REPLICATION = "enableS3Replication"
+    ENABLE_DYNAMODB = "enableDynamodb"
 
 
 def context_flag(node: constructs.Node, key: ContextFlag, *, default: bool) -> bool:

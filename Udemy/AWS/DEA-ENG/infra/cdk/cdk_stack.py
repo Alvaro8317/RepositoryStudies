@@ -5,7 +5,7 @@ from aws_cdk import (
 )
 
 from cdk import context
-from cdk.resources import glue, streaming
+from cdk.resources import dynamodb, glue, streaming
 
 
 class CdkStack(aws_cdk.Stack):
@@ -28,3 +28,6 @@ class CdkStack(aws_cdk.Stack):
 
         if context.context_flag(self.node, context.ContextFlag.ENABLE_GLUE, default=True):
             glue.add_glue_resources(self, env_name=env_name, bucket=bucket)
+
+        if context.context_flag(self.node, context.ContextFlag.ENABLE_DYNAMODB, default=True):
+            dynamodb.add_dynamodb_resources(self, env_name=env_name)

@@ -22,7 +22,9 @@ cdk_stack.CdkStack(
 # Cross-Region Replication genuinely needs two stacks in two different regions —
 # see 6-storage-s3/8-cross-region-replication.md. cross_region_references lets the
 # source stack reference the target bucket via CDK's SSM-backed cross-region export.
-if context.context_flag(app.node, context.ContextFlag.ENABLE_S3_REPLICATION, default=True):
+if context.context_flag(
+    app.node, context.ContextFlag.ENABLE_S3_REPLICATION, default=True
+):
     s3_replication_target = s3_replication_stack.S3ReplicationTargetStack(
         app,
         "s3-replication-target",
