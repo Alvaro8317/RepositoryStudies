@@ -24,10 +24,10 @@ capa adicional encima de la `Core Layer`: los **`Data Marts`**.
 
 ## Ventajas de usar Data Marts
 
-| Ventaja                  | Descripción                                                                                     |
-|----------------------------|-----------------------------------------------------------------------------------------------------|
-| **Usabilidad**             | Es más fácil para los usuarios (a menudo no técnicos) enfocarse solo en los datos relevantes para su caso de uso, sin sentirse abrumados por todas las tablas del `Data Warehouse`. Esto es clave para la adopción del `Data Warehouse`/`Data Mart`. |
-| **Rendimiento**             | Al modelar los datos dimensionalmente para un caso de uso específico, se puede usar tecnología especializada (ej. bases de datos in-memory, cubos OLAP) que ofrece consultas mucho más rápidas. |
+| Ventaja         | Descripción                                                                                                                                                                                                                                          |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Usabilidad**  | Es más fácil para los usuarios (a menudo no técnicos) enfocarse solo en los datos relevantes para su caso de uso, sin sentirse abrumados por todas las tablas del `Data Warehouse`. Esto es clave para la adopción del `Data Warehouse`/`Data Mart`. |
+| **Rendimiento** | Al modelar los datos dimensionalmente para un caso de uso específico, se puede usar tecnología especializada (ej. bases de datos in-memory, cubos OLAP) que ofrece consultas mucho más rápidas.                                                      |
 
 Mejor rendimiento y mejor usabilidad se refuerzan mutuamente: ambos aumentan la aceptación del
 `Data Warehouse`/`Data Mart` por parte de los usuarios.
