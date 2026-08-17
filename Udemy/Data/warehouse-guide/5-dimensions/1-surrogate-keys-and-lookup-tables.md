@@ -74,11 +74,11 @@ necesidad de mantener esos atributos duplicados en la tabla de hechos.
 
 Con esta estructura, las tablas de dimensiones tienden a tener:
 
-| Característica | Detalle                                                                                        |
-| --------------- | ----------------------------------------------------------------------------------------------- |
-| **Filas**       | Pocas, en comparación con la `Fact Table`.                                                       |
-| **Columnas**    | Muchas — tabla ancha, con distintos atributos descriptivos.                                      |
-| **Contenido**   | Especialmente útil cuando hay valores de texto largos y muchos atributos descriptivos.           |
+| Característica | Detalle                                                                                |
+| -------------- | -------------------------------------------------------------------------------------- |
+| **Filas**      | Pocas, en comparación con la `Fact Table`.                                             |
+| **Columnas**   | Muchas — tabla ancha, con distintos atributos descriptivos.                            |
+| **Contenido**  | Especialmente útil cuando hay valores de texto largos y muchos atributos descriptivos. |
 
 Estas dimensiones se usan luego para **agrupar y filtrar** los datos (`slice and dice`), usando solo
 algunos de sus atributos según el análisis — por ejemplo, agrupar por nombre de producto. Este es el
