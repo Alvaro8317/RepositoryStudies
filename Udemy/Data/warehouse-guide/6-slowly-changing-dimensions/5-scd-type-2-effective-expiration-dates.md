@@ -58,11 +58,11 @@ usar una `Surrogate Key` como clave primaria — sin ella, este enfoque simpleme
 
 ## Resumen
 
-| Columna           | Propósito                                                                    |
-| ------------------ | -------------------------------------------------------------------------------- |
-| `Effective Date`   | Desde cuándo es válida esa fila/versión del valor.                              |
-| `Expiration Date`  | Hasta cuándo es válida — usar una fecha lejana en el futuro en vez de `NULL`.    |
-| `is_current` (flag)| Opcional — marca directamente cuál fila es la versión vigente, para filtrar fácil. |
+| Columna             | Propósito                                                                          |
+| ------------------- | ---------------------------------------------------------------------------------- |
+| `Effective Date`    | Desde cuándo es válida esa fila/versión del valor.                                 |
+| `Expiration Date`   | Hasta cuándo es válida — usar una fecha lejana en el futuro en vez de `NULL`.      |
+| `is_current` (flag) | Opcional — marca directamente cuál fila es la versión vigente, para filtrar fácil. |
 
 ## Próxima clase
 

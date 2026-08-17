@@ -52,9 +52,9 @@ necesitan estrategias adicionales para resolver esto — se tratarán en la pró
 
 ## Resumen
 
-| Tipo         | Estrategia                                                | Historial                        | Cambios en la Fact Table              |
-| ------------ | ----------------------------------------------------------- | ----------------------------------- | ----------------------------------------- |
-| `SCD Type 2` | Añadir una fila nueva con nueva `Surrogate Key` por cambio.  | Se conserva, perfectamente particionada. | Ninguno — solo usar la nueva clave a futuro. |
+| Tipo         | Estrategia                                                  | Historial                                | Cambios en la Fact Table                     |
+| ------------ | ----------------------------------------------------------- | ---------------------------------------- | -------------------------------------------- |
+| `SCD Type 2` | Añadir una fila nueva con nueva `Surrogate Key` por cambio. | Se conserva, perfectamente particionada. | Ninguno — solo usar la nueva clave a futuro. |
 
 ## Próxima clase
 

@@ -47,6 +47,6 @@ de cumplir esa condición y romper esa consulta o reporte.
 
 ## Resumen
 
-| Tipo         | Estrategia                                    | Historial     | Complejidad de implementación |
-| ------------ | ---------------------------------------------- | ------------- | -------------------------------- |
-| `SCD Type 1` | Sobrescribir el valor antiguo con el nuevo.     | No se conserva | Muy baja — solo un `UPDATE`.     |
+| Tipo         | Estrategia                                  | Historial      | Complejidad de implementación |
+| ------------ | ------------------------------------------- | -------------- | ----------------------------- |
+| `SCD Type 1` | Sobrescribir el valor antiguo con el nuevo. | No se conserva | Muy baja — solo un `UPDATE`.  |

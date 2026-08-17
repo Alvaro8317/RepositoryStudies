@@ -51,11 +51,11 @@ anterior en vez de la actual.
 `Type 3` encaja bien solo en una situación específica: un cambio grande y **predecible**, donde todos
 los valores cambian a la vez en un momento conocido.
 
-| Situación                                            | Tipo recomendado                                  |
-| ------------------------------------------------------ | ---------------------------------------------------- |
-| Cambios frecuentes e impredecibles                     | `SCD Type 2` — conserva todo el historial correctamente. |
-| Cambios menores que no importan para el análisis        | `SCD Type 1` — la opción más simple.                 |
-| Cambio grande, planificado, que ocurre de una sola vez  | `SCD Type 3` — permite alternar entre estado actual y anterior. |
+| Situación                                              | Tipo recomendado                                                |
+| ------------------------------------------------------ | --------------------------------------------------------------- |
+| Cambios frecuentes e impredecibles                     | `SCD Type 2` — conserva todo el historial correctamente.        |
+| Cambios menores que no importan para el análisis       | `SCD Type 1` — la opción más simple.                            |
+| Cambio grande, planificado, que ocurre de una sola vez | `SCD Type 3` — permite alternar entre estado actual y anterior. |
 
 ## Resumen
 
