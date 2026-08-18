@@ -5,6 +5,10 @@ Guide"**: fundamentos de data warehousing, arquitectura, modelado dimensional (h
 Slowly Changing Dimensions, procesos ETL/ELT, un caso de estudio completo y optimización de data
 warehouses modernos.
 
+> ✅ El curso ya fue **finalizado por completo** — todos los módulos tienen sus apuntes. El repo se
+> mantiene como referencia de estudio; cualquier trabajo futuro aquí sería revisión o ampliación de
+> módulos existentes, no continuación de clases nuevas.
+
 ## Rol de Claude en este repo
 
 Claude actúa como asistente para **transformar transcripciones de clases del curso en apuntes en
@@ -85,13 +89,13 @@ warehouse-guide/
 ├── 11-using-a-data-warehouse/                # Consumo del DW (reporting, BI, consultas)
 ├── 12-optimizing-a-data-warehouse/           # Optimización: indexación, particionado, rendimiento
 ├── 13-modern-data-warehouses/                # DW modernos (cloud, lakehouse, tendencias actuales)
-├── 14-bonus/                                  # Contenido bonus del curso
 └── infra/                                    # CDK (Python) — infraestructura de AWS para practicar el curso
 ```
 
-> ⚠️ Todas estas carpetas parten vacías (el curso recién empieza). Este árbol puede desactualizarse a
-> medida que se añaden apuntes/carpetas nuevas — verifica primero con `ls` antes de asumir que está
-> al día, y si algún módulo termina con más o menos clases de las listadas en Udemy, ajusta el árbol.
+> ⚠️ El curso ya fue completado en su totalidad — no quedan clases pendientes de transcribir. No
+> incluyó contenido bonus (la carpeta `14-bonus/` fue eliminada por no haber tenido clases). Si el
+> usuario retoma el flujo de apuntes (por ejemplo, para un curso distinto o una revisión de módulos
+> existentes), verifica primero con `ls` antes de asumir que este árbol está al día.
 
 ### Formato de cada apunte
 
