@@ -76,20 +76,20 @@ DEA-ENG/
 ├── 3-glue-deep-dive/         # Glue avanzado: coste, budgets, jobs, bookmarks, workflows, DataBrew...
 ├── 4-serverless-lambda/      # Lambda, práctica Lambda+S3, Lambda Layers
 ├── 5-data-streaming/         # Kinesis (overview, Data Streams, Firehose), replayability, enhanced fan-out
-├── 6-storage-s3/             # (vacío por ahora)
+├── 6-storage-s3/             # Partitioning, storage classes, lifecycle rules, intelligent tiering, versioning, replicación entre regiones, cifrado, bucket policies, access points, object lambda, event notifications, data mesh, data exchange
 ├── 7-other-storage-services/ # EBS, snapshots/volumes, EFS, AWS Backup
 ├── 8-dynamo-db/              # DynamoDB: componentes, claves, índices, streams, APIs, DAX, capacidad, TTL, hot partitions
-├── 9-redshift-data-warehouse/ # (vacío por ahora)
+├── 9-redshift-data-warehouse/ # Amazon Redshift: overview, columnar storage, MPP
 ├── 10-other-db-services/     # RDS, ACID/locks, Aurora, DocumentDB, Neptune, Keyspaces, MemoryDB, Timestream
-├── 11-compute-services/      # (vacío por ahora)
+├── 11-compute-services/      # EC2, Batch, SAM, Application Auto Scaling
 ├── 12-analytics/             # (vacío por ahora)
 ├── 13-machine-learning-sagemaker/ # (vacío por ahora)
 ├── 14-application-integration/    # (vacío por ahora)
 ├── 15-management-monitoring-governance/ # (vacío por ahora)
-├── 16-containers/            # (vacío por ahora)
-├── 17-migration/             # (vacío por ahora)
-├── 18-vpcs/                  # (vacío por ahora)
-├── 19-security/              # (vacío por ahora)
+├── 16-containers/            # Docker, ECS, ECS launch types, ECS IAM roles, ECR, EKS
+├── 17-migration/             # Snow Family, Transfer Family, DataSync, DMS, Application Discovery Service, Application Migration Service
+├── 18-vpcs/                  # VPC, network components, hybrid connectivity, security, additional features
+├── 19-security/              # KMS, Macie, Secrets Manager (+ práctica), Shield
 ├── 20-practice-exam/         # (vacío por ahora)
 └── infra/                    # CDK (Python) — infraestructura de AWS para practicar el curso
 ```
