@@ -52,12 +52,12 @@ AWS Shield tiene **dos niveles**: **Standard** y **Advanced**.
 
 ## Resumen: Standard vs. Advanced
 
-| Característica                     | Shield Standard                          | Shield Advanced                                    |
-| ----------------------------------- | ----------------------------------------- | --------------------------------------------------- |
-| **Coste**                          | Gratis                                    | Cargo adicional                                     |
-| **Activación**                     | Automática                                | Hay que suscribirse                                 |
-| **Cobertura**                      | Ataques DDoS comunes (capas 3, 4 y 7)     | Ataques más grandes y sofisticados (incluye capa 7) |
-| **Cost Protection**                | No                                        | Sí — cubre costes de auto scaling por el ataque     |
-| **DDoS Response Team (DRT)**       | No                                        | Sí — asistencia inmediata durante ataques           |
-| **Diagnósticos detallados**        | No                                        | Sí — informes en tiempo real y post-evento, con WAF/Firewall Manager |
-| **Protección de recursos específicos** | No                                     | Sí — EC2, Elastic IP, Global Accelerator, etc.       |
+| Característica                         | Shield Standard                       | Shield Advanced                                                      |
+| -------------------------------------- | ------------------------------------- | -------------------------------------------------------------------- |
+| **Coste**                              | Gratis                                | Cargo adicional                                                      |
+| **Activación**                         | Automática                            | Hay que suscribirse                                                  |
+| **Cobertura**                          | Ataques DDoS comunes (capas 3, 4 y 7) | Ataques más grandes y sofisticados (incluye capa 7)                  |
+| **Cost Protection**                    | No                                    | Sí — cubre costes de auto scaling por el ataque                      |
+| **DDoS Response Team (DRT)**           | No                                    | Sí — asistencia inmediata durante ataques                            |
+| **Diagnósticos detallados**            | No                                    | Sí — informes en tiempo real y post-evento, con WAF/Firewall Manager |
+| **Protección de recursos específicos** | No                                    | Sí — EC2, Elastic IP, Global Accelerator, etc.                       |
