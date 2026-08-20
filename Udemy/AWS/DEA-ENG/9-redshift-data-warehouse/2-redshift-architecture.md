@@ -54,10 +54,10 @@ Un cluster de Redshift está formado principalmente por dos tipos de componentes
 
 Al crear una nueva instancia de Redshift hay dos opciones:
 
-| Opción                            | Cuándo usarla                                                                                     |
-| ---------------------------------- | --------------------------------------------------------------------------------------------------- |
-| **Amazon Redshift Serverless**    | Cuando el almacén de datos necesita **escalar automáticamente** según la demanda — útil si la carga de trabajo es **más impredecible**. |
-| **Cluster provisioned**           | Da **más control** sobre la configuración — más adecuado para cargas de trabajo **predecibles o estables**. |
+| Opción                         | Cuándo usarla                                                                                                                           |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| **Amazon Redshift Serverless** | Cuando el almacén de datos necesita **escalar automáticamente** según la demanda — útil si la carga de trabajo es **más impredecible**. |
+| **Cluster provisioned**        | Da **más control** sobre la configuración — más adecuado para cargas de trabajo **predecibles o estables**.                             |
 
 > ⚠️ La elección entre serverless y provisioned depende sobre todo de qué tan **predecible** sea la
 > carga de trabajo: automática y flexible (serverless) frente a control total y estabilidad
