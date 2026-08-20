@@ -25,6 +25,9 @@ Redshift ofrece cuatro estilos de distribución: **KEY**, **ALL**, **EVEN** y **
 - Es útil para tablas que **participan frecuentemente en JOINs**: si las tablas relacionadas
   comparten la misma clave de distribución, las filas que se necesitan juntar ya están en la misma
   slice, evitando mover datos entre nodos durante el `JOIN`.
+- Se recomienda específicamente cuando las consultas suelen hacer `JOIN` entre tablas que
+  **comparten una clave de distribución común** — es ese requisito de clave común, más que el
+  tamaño de las tablas, lo que determina si conviene usar KEY distribution.
 
 ## ALL distribution
 
@@ -41,6 +44,9 @@ Redshift ofrece cuatro estilos de distribución: **KEY**, **ALL**, **EVEN** y **
 - Es apropiado cuando:
   - La tabla **no participa en JOINs**.
   - **No hay una elección clara** entre usar **KEY distribution** o **ALL distribution**.
+  - La tabla se **actualiza con frecuencia**: al repartir los datos de forma equitativa entre
+    todos los nodos, ayuda a **balancear la carga de trabajo** de las actualizaciones y minimizar
+    el impacto en el rendimiento de las consultas.
 
 ## AUTO distribution
 
@@ -63,5 +69,5 @@ Redshift ofrece cuatro estilos de distribución: **KEY**, **ALL**, **EVEN** y **
 | ------------------ | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | **KEY**            | Según los valores de una columna (Distribution Key), filas coincidentes en la misma slice | Tablas que participan frecuentemente en JOINs                       |
 | **ALL**            | Copia completa de la tabla en cada nodo                                                   | Tablas pequeñas y de cambio lento                                   |
-| **EVEN**           | Reparto uniforme, sin tener en cuenta columnas                                            | Tablas sin JOINs, o sin una elección clara entre KEY y ALL          |
+| **EVEN**           | Reparto uniforme, sin tener en cuenta columnas                                            | Tablas sin JOINs, sin elección clara entre KEY y ALL, o que se actualizan con frecuencia |
 | **AUTO**           | Redshift elige automáticamente (ALL → KEY → EVEN según crece la tabla)                    | Por defecto — cuando no se quiere gestionar la elección manualmente |

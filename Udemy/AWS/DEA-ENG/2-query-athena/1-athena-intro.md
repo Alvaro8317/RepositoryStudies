@@ -32,6 +32,21 @@
 > ⚠️ Athena no almacena datos por sí misma: consulta directamente los archivos en S3, apoyándose en
 > el esquema definido en el Glue Data Catalog (alimentado por los Glue Crawlers).
 
+## Schema-on-read
+
+- Athena aplica **schema-on-read** (esquema al leer): los datos en S3 se guardan tal cual, **sin
+  cambiar los datos originales**.
+- El esquema definido en el Glue Data Catalog se **proyecta** sobre esos datos únicamente **en el
+  momento de la consulta**, traduciéndolos a un formato estructurado similar al de una base de
+  datos relacional.
+- Esto contrasta con el enfoque tradicional de las bases de datos relacionales (**schema-on-write**),
+  donde el esquema se aplica y valida al **escribir** los datos.
+
+## Seguridad
+
+- Athena usa **IAM** (para controlar qué usuarios/roles pueden ejecutar qué acciones) y **ACLs**
+  (Access Control Lists) para controlar el acceso tanto a los **datos** como a las **consultas**.
+
 ## Integraciones
 
 | Herramienta / opción  | Uso                                                                   |

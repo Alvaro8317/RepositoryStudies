@@ -18,12 +18,13 @@ Cada Workgroup agrupa un tipo de carga de trabajo bajo su propia configuración,
 
 Cada Workgroup puede tener su propia configuración, entre otras cosas:
 
-| Configuración | Descripción |
-| --------------------------------- | ------------------------------------------------------------------------------------------ |
-| **Ubicación de resultados** | Bucket de S3 donde se almacenan los resultados de las consultas ejecutadas en ese Workgroup. |
-| **Control de acceso** | Mediante políticas de IAM basadas en identidad, a nivel de recurso. |
-| **Control de coste** | Límites y seguimiento de coste específicos para ese Workgroup. |
-| **Motor de consulta** | Athena SQL (por defecto) o **Apache Spark**. |
+| Configuración               | Descripción                                                                                   |
+| --------------------------- | --------------------------------------------------------------------------------------------- |
+| **Ubicación de resultados** | Bucket de S3 donde se almacenan los resultados de las consultas ejecutadas en ese Workgroup.  |
+| **Control de acceso**       | Mediante políticas de IAM basadas en identidad, a nivel de recurso.                           |
+| **Control de coste**        | Límites y seguimiento de coste específicos para ese Workgroup.                                |
+| **Motor de consulta**       | Athena SQL (por defecto) o **Apache Spark**.                                                  |
+| **Cifrado**                 | Configuración de cifrado personalizada para los resultados de las consultas de ese Workgroup. |
 
 - El acceso a un Workgroup se controla con **políticas de IAM**: quien tenga permiso puede
   seleccionarlo (desde un desplegable en la consola) para ejecutar sus consultas en él.
