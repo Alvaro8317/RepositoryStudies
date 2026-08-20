@@ -52,7 +52,7 @@ CREATE TABLE orders (
 ```sql
 COPY public.orders
 FROM 's3://alvaro8317-dea-certification-prod/redshift-source/'
-CREDENTIALS 'aws_iam_role=arn:aws:iam::490004645449:role/service-role/AmazonRedshift-CommandsAccessRole-20260819T202502'
+CREDENTIALS 'aws_iam_role=arn:aws:iam::123456789012:role/service-role/AmazonRedshift-CommandsAccessRole-20260819T202502'
 DELIMITER ','
 IGNOREHEADER 1
 REGION 'us-east-1';
@@ -115,7 +115,7 @@ Redshift a un bucket de S3.
 ```sql
 UNLOAD('SELECT * FROM orders')
 TO 's3://alvaro8317-dea-certification-prod/redshift-destiny/orders_table_parallel_off.csv'
-CREDENTIALS 'aws_iam_role=arn:aws:iam::490004645449:role/service-role/AmazonRedshift-CommandsAccessRole-20260819T202502'
+CREDENTIALS 'aws_iam_role=arn:aws:iam::123456789012:role/service-role/AmazonRedshift-CommandsAccessRole-20260819T202502'
 DELIMITER AS ','
 ALLOWOVERWRITE
 PARALLEL OFF;

@@ -49,7 +49,16 @@ PostgreSQL**, incluyendo:
 ## Cómo funciona
 
 1. Se crean **definiciones de esquema externo (external schema)** que apuntan a la fuente de datos
-   externa.
+   externa, por ejemplo:
+
+   ```sql
+   CREATE EXTERNAL SCHEMA postgres_schema
+   FROM POSTGRES DATABASE 'database_name' SCHEMA 'public'
+   URI ''
+   IAM_ROLE ''
+   SECRET_ARN ''
+   ```
+
 2. A partir de ahí, se pueden consultar las **tablas externas** junto con las tablas normales de
    Redshift usando **SQL estándar** — desde el punto de vista de la consulta, se comportan como
    una tabla más.
