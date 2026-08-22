@@ -27,6 +27,12 @@ Una vez preparados los datos, DataBrew se integra fácilmente con otros servicio
 - **AWS Lake Formation**: seguridad y gobernanza de los datos.
 - **AWS IAM**: gestión de permisos.
 
+## Formatos de archivo soportados
+
+DataBrew admite formatos habituales de datos tabulares/semiestructurados como **CSV**, **JSON** y
+**Parquet**, entre otros — pero no cualquier formato: por ejemplo, **KML** (formato geoespacial) **no
+está soportado**.
+
 ## Interfaz: vista previa y perfiles de datos
 
 En la interfaz de un proyecto de DataBrew se puede ver:

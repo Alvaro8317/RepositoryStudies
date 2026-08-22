@@ -39,14 +39,14 @@ real sobre los datos almacenados en OpenSearch.
 Es fácil confundirlos porque ambos sirven para monitorizar y consultar logs/métricas, pero
 resuelven necesidades distintas:
 
-| Aspecto | CloudWatch (Logs + Metrics) | OpenSearch |
-| --- | --- | --- |
-| Propósito principal | Monitorización **nativa** de servicios AWS: métricas operativas, logs y alarmas | Motor de **búsqueda y analítica de propósito general** sobre cualquier tipo de dato (logs, texto libre, documentos de negocio...) |
-| Origen de los datos | Generado automáticamente por servicios AWS, o enviado vía agentes/SDK | Cualquier fuente — logs de CloudWatch, aplicaciones, dispositivos IoT, datos de negocio, etc. — normalmente ingestado vía Kinesis Data Firehose, Logstash, agentes, etc. |
-| Capacidad de búsqueda | Limitada: **CloudWatch Logs Insights** permite consultas tipo query sobre logs, pero no es un motor de búsqueda full-text | Motor de **búsqueda full-text** avanzado (basado en Lucene): relevancia, agregaciones complejas, fuzzy search, etc. |
-| Retención/almacenamiento | Retención configurable por log group; pensado para operación a corto/medio plazo | Pensado para almacenar y analizar grandes volúmenes de datos a más largo plazo, organizados en índices con shards/réplicas |
-| Visualización | CloudWatch Dashboards (básico) | **OpenSearch Dashboards**, mucho más rico para exploración interactiva |
-| Gestión de infraestructura | Totalmente gestionado, sin clúster que administrar | Servicio gestionado, pero con clúster/nodos configurables (o la opción serverless) |
+| Aspecto                    | CloudWatch (Logs + Metrics)                                                                                               | OpenSearch                                                                                                                                                               |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Propósito principal        | Monitorización **nativa** de servicios AWS: métricas operativas, logs y alarmas                                           | Motor de **búsqueda y analítica de propósito general** sobre cualquier tipo de dato (logs, texto libre, documentos de negocio...)                                        |
+| Origen de los datos        | Generado automáticamente por servicios AWS, o enviado vía agentes/SDK                                                     | Cualquier fuente — logs de CloudWatch, aplicaciones, dispositivos IoT, datos de negocio, etc. — normalmente ingestado vía Kinesis Data Firehose, Logstash, agentes, etc. |
+| Capacidad de búsqueda      | Limitada: **CloudWatch Logs Insights** permite consultas tipo query sobre logs, pero no es un motor de búsqueda full-text | Motor de **búsqueda full-text** avanzado (basado en Lucene): relevancia, agregaciones complejas, fuzzy search, etc.                                                      |
+| Retención/almacenamiento   | Retención configurable por log group; pensado para operación a corto/medio plazo                                          | Pensado para almacenar y analizar grandes volúmenes de datos a más largo plazo, organizados en índices con shards/réplicas                                               |
+| Visualización              | CloudWatch Dashboards (básico)                                                                                            | **OpenSearch Dashboards**, mucho más rico para exploración interactiva                                                                                                   |
+| Gestión de infraestructura | Totalmente gestionado, sin clúster que administrar                                                                        | Servicio gestionado, pero con clúster/nodos configurables (o la opción serverless)                                                                                       |
 
 > ⚠️ En la práctica, no suelen usarse el uno en lugar del otro, sino **juntos**: CloudWatch Logs
 > captura los logs de forma nativa, y desde ahí se pueden exportar a OpenSearch (por ejemplo, vía
@@ -58,7 +58,7 @@ resuelven necesidades distintas:
 
 | Componente    | Descripción                                                                                                                                                                                                                                                                         |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Documento** | Una única pieza de información — comparable a una fila de una tabla o un registro de una base de datos. Tiene siempre un **ID único** para localizarlo.                                                                                                                             |
+| **Documento** | La **unidad básica de información** en OpenSearch — comparable a una fila de una tabla o un registro de una base de datos. Se almacena en formato **JSON** y tiene siempre un **ID único** para localizarlo.                                                                        |
 | **Tipo**      | Concepto de versiones antiguas de OpenSearch/Elasticsearch (previo a la 7.0), usado junto con un índice para dar estructura a los documentos. Ya no se usa desde la 7.0, pero puede seguir apareciendo en aplicaciones antiguas.                                                    |
 | **Índice**    | Comparable a una base de datos: agrupa documentos similares y define su esquema (estructura/campos). Se pueden tener varios índices para distintos casos de uso (ej. uno para clientes, otro para productos), cada uno con su propia configuración de rendimiento y almacenamiento. |
 
@@ -229,11 +229,11 @@ Al crear índices en OpenSearch, los datos se pueden almacenar en distintos **ni
 almacenamiento (storage tiers)**, según con qué frecuencia se accede a ellos y qué rendimiento se
 necesita:
 
-| Nivel | Dónde reside | Rendimiento / coste | Editable |
-| --- | --- | --- | --- |
-| **Hot storage** | Almacenamiento local de los nodos de datos estándar — instance store de EC2 o volúmenes **EBS** adjuntos a cada nodo | El más rápido; mayor coste | Sí |
-| **UltraWarm** | Solución de caché sofisticada combinada con **Amazon S3** | Rendimiento intermedio; coste mucho menor que hot | Solo lectura (se puede mover a hot para editar) |
-| **Cold storage** | **Amazon S3**, sin capacidad de cómputo asociada — los índices quedan "desconectados" | El de menor coste; datos inaccesibles hasta reconectar | No accesible directamente |
+| Nivel            | Dónde reside                                                                                                         | Rendimiento / coste                                    | Editable                                        |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ | ----------------------------------------------- |
+| **Hot storage**  | Almacenamiento local de los nodos de datos estándar — instance store de EC2 o volúmenes **EBS** adjuntos a cada nodo | El más rápido; mayor coste                             | Sí                                              |
+| **UltraWarm**    | Solución de caché sofisticada combinada con **Amazon S3**                                                            | Rendimiento intermedio; coste mucho menor que hot      | Solo lectura (se puede mover a hot para editar) |
+| **Cold storage** | **Amazon S3**, sin capacidad de cómputo asociada — los índices quedan "desconectados"                                | El de menor coste; datos inaccesibles hasta reconectar | No accesible directamente                       |
 
 - **Hot storage** (nivel por defecto): pensado para datos a los que se accede **con frecuencia** y
   que requieren recuperación instantánea — indexación activa, escritura activa, consultas activas.
@@ -304,3 +304,26 @@ opción que elimina también esa gestión de capacidad.
 > ⚠️ OpenSearch Serverless es la opción recomendada cuando no es conveniente (o no se quiere)
 > preocuparse por la gestión del clúster, y el objetivo es centrarse solo en las tareas de datos —
 > con el beneficio adicional de ahorro de costes en cargas de trabajo variables.
+
+### Collections (colecciones)
+
+En OpenSearch Serverless, los datos se organizan en **collections** en lugar de configurarse
+directamente a nivel de clúster/dominio. Existen dos tipos:
+
+- **Search collection**: pensada para casos de uso de **búsqueda** (búsqueda de texto, catálogos,
+  aplicaciones, etc.).
+- **Time series collection**: pensada para datos de **series temporales** — típicamente logs y
+  métricas que llegan de forma continua y ordenada en el tiempo.
+
+### OCUs (OpenSearch Compute Units)
+
+- Las **OCUs** son las **unidades de cómputo** que OpenSearch Serverless usa para escalar. Aunque el
+  escalado es automático, se puede establecer un **límite superior de OCUs** para controlar el
+  coste máximo, evitando que un pico de carga inesperado dispare la factura sin control.
+
+### Cifrado en Serverless
+
+- Los datos en OpenSearch Serverless están **siempre cifrados**, usando una clave de **AWS KMS** —
+  a diferencia de OpenSearch "tradicional", donde el cifrado en reposo depende de plugins/config
+  adicional (ver la sección de [Seguridad](#seguridad) más arriba), en Serverless viene activado por
+  defecto, sin configuración extra.

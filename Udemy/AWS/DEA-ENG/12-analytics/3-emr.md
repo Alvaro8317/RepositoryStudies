@@ -27,6 +27,19 @@ Aunque ambos sirven para procesar/transformar datos, EMR y Glue tienen casos de 
   - Ya existen recursos **on-premises** que se quieren migrar, por ejemplo un **Hive Metastore**
     propio — es más fácil migrarlo y seguir usándolo en EMR de forma gestionada en la nube.
 
+## Integración con el Glue Data Catalog
+
+EMR puede usar el **Glue Data Catalog** como metastore compartido: le proporciona **gestión de
+metadatos y definición de esquemas** para los datos almacenados en S3 (y otras fuentes), sin
+necesidad de mantener un Hive Metastore propio dentro del clúster.
+
+- Facilita la **interoperabilidad**: los mismos metadatos/esquemas quedan disponibles para otras
+  herramientas del ecosistema de AWS (Athena, Redshift Spectrum, Glue ETL Jobs, etc.), no solo para
+  el clúster de EMR que los generó.
+- Al ser externo al clúster, los metadatos **persisten** aunque el clúster EMR se termine —
+  consistente con el patrón de EMRFS para los datos: separar el ciclo de vida del clúster (efímero)
+  del de los metadatos/datos (persistentes).
+
 ## Precios
 
 - Se cobra **por hora**, según las **instancias EC2** subyacentes utilizadas por el clúster.
@@ -49,10 +62,10 @@ EMR se originó y se basa principalmente en **Hadoop**, un framework open source
 **almacenamiento y procesamiento distribuido** de grandes volúmenes de datos, con dos componentes
 principales:
 
-| Componente                                | Función                                                                                                                          |
-| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| **HDFS** (Hadoop Distributed File System) | Almacenamiento: divide los datos en **bloques** y los distribuye entre varios nodos del clúster, con acceso de alto rendimiento. |
-| **MapReduce**                             | Modelo de procesamiento: procesa esos grandes conjuntos de datos de forma **distribuida y en paralelo** sobre el clúster.        |
+| Componente                                | Función                                                                                                                                                           |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **HDFS** (Hadoop Distributed File System) | Almacenamiento: divide los datos en **bloques** (tamaño por defecto: **128 MB**) y los distribuye entre varios nodos del clúster, con acceso de alto rendimiento. |
+| **MapReduce**                             | Modelo de procesamiento: procesa esos grandes conjuntos de datos de forma **distribuida y en paralelo** sobre el clúster.                                         |
 
 ## Otros frameworks soportados: Spark, Presto y Flink
 
@@ -135,12 +148,12 @@ procesamiento que deben gestionar:
 
 EMR ofrece varias opciones de almacenamiento, cada una adecuada para un caso de uso distinto:
 
-| Tipo                                      | Descripción                                                                                                                                                          | Persiste tras terminar el clúster |
-| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
-| **HDFS** (Hadoop Distributed File System) | Almacenamiento tradicional de Hadoop: los datos residen en el **disco local** de cada nodo del clúster, con acceso de alta velocidad.                                | No                                |
-| **EMRFS** (EMR File System)               | Implementación de HDFS que permite a los clústeres EMR almacenar datos directamente en **S3**.                                                                       | Sí                                |
-| **Sistema de archivos local**             | Sistema de archivos regular de cada nodo, para datos **temporales específicos de ese nodo** (ej. datos intermedios de tareas MapReduce). No se comparte entre nodos. | No                                |
-| **Volúmenes EBS**                         | Capacidad de disco adicional adjunta a los nodos (ej. SSDs para más rendimiento y flexibilidad de capacidad).                                                        | No                                |
+| Tipo                                      | Descripción                                                                                                                                                                                                                                                                                   | Persiste tras terminar el clúster |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
+| **HDFS** (Hadoop Distributed File System) | Almacenamiento tradicional de Hadoop: los datos residen en el **disco local** de cada nodo del clúster, con acceso de alta velocidad.                                                                                                                                                         | No                                |
+| **EMRFS** (EMR File System)               | Implementación de HDFS que permite a los clústeres EMR almacenar datos directamente en **S3**.                                                                                                                                                                                                | Sí                                |
+| **Sistema de archivos local**             | Sistema de archivos regular de cada nodo, para datos **temporales específicos de ese nodo** (ej. datos intermedios de tareas MapReduce). No se comparte entre nodos. Ofrece **alto rendimiento** para operaciones de E/S (I/O) intensivas gracias al acceso directo al disco de la instancia. | No                                |
+| **Volúmenes EBS**                         | Capacidad de disco adicional adjunta a los nodos (ej. SSDs para más rendimiento y flexibilidad de capacidad).                                                                                                                                                                                 | No                                |
 
 > ⚠️ **HDFS, sistema de archivos local y volúmenes EBS son todos efímeros**: los datos ahí
 > almacenados se pierden al terminar el clúster, salvo que se haga backup en otro almacenamiento
