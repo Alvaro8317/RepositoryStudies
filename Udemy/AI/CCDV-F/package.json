@@ -1,0 +1,13 @@
+{
+  "name": "ccdv-f-notes",
+  "version": "1.0.0",
+  "description": "Apuntes de estudio para Claude Certified Developer Foundations (CCDV-F)",
+  "private": true,
+  "scripts": {
+    "lint:md": "markdownlint-cli2 \"**/*.md\"",
+    "lint:md:fix": "markdownlint-cli2 --fix \"**/*.md\""
+  },
+  "devDependencies": {
+    "markdownlint-cli2": "^0.23.1"
+  }
+}
